@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modern Blog | シンプルで読みやすいブログ</title>
+    <meta name="description" content="クリーンでミニマル、読みやすさ重視のブログモック。UI/UX・フロントエンドの知見を発信します。" />
+    <link rel="canonical" href="https://example.com/" />
+    <meta property="og:title" content="Modern Blog | シンプルで読みやすいブログ" />
+    <meta property="og:description" content="クリーンでミニマル、読みやすさ重視のブログモック。UI/UX・フロントエンドの知見を発信します。" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1280&auto=format&fit=crop" />
+    <meta property="og:url" content="https://example.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* システムフォントのみ（外部フォント依存なし） */
+      body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "YuGothic", "Helvetica Neue", Arial, sans-serif; }
+      /* 最小ヘルパー（プラグイン不使用） */
+      .aspect-16-9 { position: relative; padding-top: 56.25%; }
+      .aspect-16-9 > img, .aspect-16-9 > iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-800">
+    <!-- Header: JSなし、detailsでモバイルナビ -->
+    <header class="sticky top-0 z-50 bg-white border-b">
+      <div class="mx-auto max-w-5xl px-4 h-14 flex items-center justify-between">
+        <a href="./minimal-index.html" class="font-semibold">Modern Blog</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-700">
+          <a href="#articles" class="hover:text-blue-600">記事</a>
+          <a href="#about" class="hover:text-blue-600">このサイトについて</a>
+          <a href="#contact" class="hover:text-blue-600">お問い合わせ</a>
+        </nav>
+        <details class="md:hidden">
+          <summary class="cursor-pointer text-sm text-slate-600">メニュー</summary>
+          <nav class="mt-2 space-y-2">
+            <a href="#articles" class="block text-sm hover:text-blue-600">記事</a>
+            <a href="#about" class="block text-sm hover:text-blue-600">このサイトについて</a>
+            <a href="#contact" class="block text-sm hover:text-blue-600">お問い合わせ</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero: 装飾最小、CTAは1つ -->
+      <section class="py-12">
+        <div class="mx-auto max-w-5xl px-4">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h1 class="text-3xl font-bold tracking-tight text-slate-900">シンプルで読みやすいモダンブログ</h1>
+              <p class="mt-3 text-slate-700">装飾を抑え、余白とコントラスト、最小限のルールで可読性を優先したブログのHTMLモックです。</p>
+              <div class="mt-6">
+                <a href="#articles" class="inline-flex items-center rounded bg-blue-600 px-5 py-2.5 text-white hover:bg-blue-700">最新記事を読む</a>
+              </div>
+            </div>
+            <div>
+              <div class="aspect-16-9 rounded-lg overflow-hidden border">
+                <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1280&auto=format&fit=crop" alt="チームでのコラボレーション風景" loading="eager" fetchpriority="high" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Articles: 影や拡大演出を省略して最小表示 -->
+      <section id="articles" class="py-10 bg-white border-y">
+        <div class="mx-auto max-w-5xl px-4">
+          <div class="flex items-end justify-between">
+            <h2 class="text-xl font-semibold text-slate-900">最新の記事</h2>
+            <a href="#" class="text-sm text-blue-600 hover:underline">もっと見る</a>
+          </div>
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <article class="border rounded-lg overflow-hidden">
+              <a href="./minimal-article.html" class="block">
+                <div class="aspect-16-9">
+                  <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop" alt="読みやすいUIのイメージ" loading="lazy" />
+                </div>
+                <div class="p-4">
+                  <div class="text-xs text-slate-500">デザイン・2025-08-10</div>
+                  <h3 class="mt-2 font-semibold text-slate-900">読みやすさを高めるUIの基本ルール</h3>
+                  <p class="mt-2 text-sm text-slate-700">余白・タイポグラフィ・コントラスト・階層化など、UIの可読性を支えるシンプルな原則。</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="border rounded-lg overflow-hidden">
+              <a href="./minimal-article.html" class="block">
+                <div class="aspect-16-9">
+                  <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1200&auto=format&fit=crop" alt="配色とコントラストのイメージ" loading="lazy" />
+                </div>
+                <div class="p-4">
+                  <div class="text-xs text-slate-500">フロントエンド・2025-08-08</div>
+                  <h3 class="mt-2 font-semibold text-slate-900">配色とコントラストの最小ルール</h3>
+                  <p class="mt-2 text-sm text-slate-700">WCAGを意識した配色の基本と、実務で使える最小ルールを整理。</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="border rounded-lg overflow-hidden">
+              <a href="./minimal-article.html" class="block">
+                <div class="aspect-16-9">
+                  <img src="https://images.unsplash.com/photo-1547658719-99ad5e2c2a5d?q=80&w=1200&auto=format&fit=crop" alt="タイポグラフィのイメージ" loading="lazy" />
+                </div>
+                <div class="p-4">
+                  <div class="text-xs text-slate-500">タイポグラフィ・2025-08-05</div>
+                  <h3 class="mt-2 font-semibold text-slate-900">本文の読みやすさを決める行間とサイズ</h3>
+                  <p class="mt-2 text-sm text-slate-700">本文16px・行高1.7を基準に、情報密度に応じた調整方法を紹介。</p>
+                </div>
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="py-12">
+        <div class="mx-auto max-w-5xl px-4">
+          <h2 class="text-xl font-semibold text-slate-900">このサイトについて</h2>
+          <p class="mt-3 text-slate-700">本サイトはミニマルなHTMLとTailwind CDNのみで構成したブログモックです。依存を減らし、読みやすさを優先する設計を示します。</p>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="py-12 bg-white border-t">
+        <div class="mx-auto max-w-5xl px-4">
+          <h2 class="text-xl font-semibold text-slate-900">お問い合わせ</h2>
+          <p class="mt-3 text-slate-700">ご連絡はメールにて: contact@example.com</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="py-8 text-center text-sm text-slate-500">
+      <div class="mx-auto max-w-5xl px-4">© 2025 Modern Blog</div>
+    </footer>
+  </body>
+  </html>
+

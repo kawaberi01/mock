@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modern Blog | シンプルで読みやすいブログデザイン</title>
+    <meta name="description" content="クリーンでミニマル、読みやすさ重視のモダンなブログ。UI/UX・フロントエンド・タイポグラフィの知見を発信します。" />
+    <meta name="robots" content="index,follow" />
+    <meta name="author" content="Modern Blog" />
+    <link rel="canonical" href="https://example.com/" />
+    <link rel="alternate" type="application/rss+xml" title="Modern Blog RSS" href="https://example.com/feed.xml" />
+    <meta name="theme-color" content="#3B82F6" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:title" content="Modern Blog | シンプルで読みやすいブログデザイン" />
+    <meta property="og:description" content="クリーンでミニマル、読みやすさ重視のモダンなブログ。UI/UX・フロントエンド・タイポグラフィの知見を発信します。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://example.com/" />
+    <meta property="og:site_name" content="Modern Blog" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1280&auto=format&fit=crop" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Modern Blog | シンプルで読みやすいブログデザイン" />
+    <meta name="twitter:description" content="クリーンでミニマル、読みやすさ重視のモダンなブログ。UI/UX・フロントエンド・タイポグラフィの知見を発信します。" />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1280&auto=format&fit=crop" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS (v3.4+, CDN for mock) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "Noto Sans JP", "system-ui", "sans-serif"],
+            },
+            boxShadow: {
+              subtle: "0 4px 14px rgba(0,0,0,0.06)",
+              card: "0 8px 30px rgba(0,0,0,0.06)",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      :root {
+        --color-primary: #3B82F6; /* 青 */
+        --color-secondary: #10B981; /* 緑 */
+        --color-text: #1F2937; /* ダークグレー */
+        --color-bg: #F9FAFB; /* ライトグレー */
+        --color-accent: #F59E0B; /* オレンジ */
+      }
+      html, body { height: 100%; }
+      body { color: var(--color-text); background: var(--color-bg); }
+      /* Subtle reveal animation */
+      .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
+      .reveal.show { opacity: 1; transform: none; }
+      /* Line clamp helpers for 2-3 lines without plugin */
+      .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+      .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+      /* 16:9 helper */
+      .aspect-16-9 { position: relative; padding-top: 56.25%; }
+      .aspect-16-9 > img, .aspect-16-9 > iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      /* Sticky header background blur support */
+      .backdrop-blur { backdrop-filter: saturate(180%) blur(8px); }
+    </style>
+  </head>
+  <body class="min-h-screen antialiased">
+    <!-- Header -->
+    <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+          <a href="./index.html" class="flex items-center gap-2 font-bold text-lg text-[var(--color-text)]">
+            <span class="inline-block h-6 w-6 rounded bg-[var(--color-primary)]"></span>
+            Modern Blog
+          </a>
+          <nav class="hidden md:flex items-center gap-6 text-sm text-gray-700">
+            <a class="hover:text-[var(--color-primary)] transition" href="#articles">記事</a>
+            <a class="hover:text-[var(--color-primary)] transition" href="#about">このサイトについて</a>
+            <a class="hover:text-[var(--color-primary)] transition" href="#contact">お問い合わせ</a>
+          </nav>
+          <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-md border border-gray-300 px-3 py-2 text-gray-700 hover:bg-gray-50 transition" aria-controls="mobileMenu" aria-expanded="false">
+            <span class="sr-only">メニューを開く</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white">
+        <div class="mx-auto max-w-7xl px-4 py-3 space-y-2 text-gray-700">
+          <a class="block hover:text-[var(--color-primary)] transition" href="#articles">記事</a>
+          <a class="block hover:text-[var(--color-primary)] transition" href="#about">このサイトについて</a>
+          <a class="block hover:text-[var(--color-primary)] transition" href="#contact">お問い合わせ</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="pt-24">
+      <!-- Hero -->
+      <section class="reveal">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="rounded-2xl bg-white shadow-subtle border border-gray-200 p-8 sm:p-12 flex flex-col md:flex-row items-center gap-8">
+            <div class="flex-1">
+              <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">シンプルで読みやすい、モダンなブログ</h1>
+              <p class="mt-4 text-gray-600">クリーンでミニマルなデザイン。コンテンツに集中できるレイアウトと心地よいタイポグラフィで、読む体験を高めます。</p>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a href="#articles" class="inline-flex items-center rounded-md bg-[var(--color-primary)] px-5 py-3 text-white shadow-subtle hover:brightness-105 active:brightness-95 transition">最新記事を読む</a>
+                <a href="#about" class="inline-flex items-center rounded-md border border-gray-300 px-5 py-3 text-gray-700 hover:bg-gray-50 transition">このサイトについて</a>
+              </div>
+            </div>
+            <div class="w-full md:w-[44%]">
+              <div class="aspect-16-9 rounded-xl overflow-hidden ring-1 ring-gray-200 shadow-card">
+                <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1280&auto=format&fit=crop" alt="チームコラボレーションを象徴するヒーロー画像" loading="lazy" decoding="async" fetchpriority="high" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content + Sidebar -->
+      <section id="articles" class="mt-12 sm:mt-16 reveal">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Articles -->
+            <div class="lg:col-span-8">
+              <div class="flex items-end justify-between">
+                <h2 class="text-xl font-bold text-gray-900">最新の記事</h2>
+                <a href="#" class="text-sm text-[var(--color-primary)] hover:underline">もっと見る</a>
+              </div>
+              <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                <!-- Card template repeated -->
+                <article class="group rounded-xl bg-white border border-gray-200 overflow-hidden shadow-subtle hover:shadow-card transition transform hover:scale-[1.02]">
+                  <a href="./article.html" class="block">
+                    <div class="aspect-16-9">
+                      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop" alt="読みやすいUIのベストプラクティスのイメージ" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="p-4">
+                      <div class="flex items-center gap-2 text-xs">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]">デザイン</span>
+                        <time class="text-gray-500">2025-08-10</time>
+                      </div>
+                      <h3 class="mt-2 font-semibold text-gray-900 line-clamp-2">読みやすさを高めるUIルール集：余白、コントラスト、階層のベストプラクティス</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-3">読みやすいデザインは細部から。余白とタイポグラフィ、そしてカラーバランスまで、ベストプラクティスを紹介します。</p>
+                    </div>
+                  </a>
+                </article>
+
+                <article class="group rounded-xl bg-white border border-gray-200 overflow-hidden shadow-subtle hover:shadow-card transition transform hover:scale-[1.02]">
+                  <a href="./article.html" class="block">
+                    <div class="aspect-16-9">
+                      <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1200&auto=format&fit=crop" alt="Tailwind CSSを使ったUI構築のイメージ" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="p-4">
+                      <div class="flex items-center gap-2 text-xs">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]">フロントエンド</span>
+                        <time class="text-gray-500">2025-08-08</time>
+                      </div>
+                      <h3 class="mt-2 font-semibold text-gray-900 line-clamp-2">Tailwind CSSで効率的に作るモダンUI：パターンとTips</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-3">Tailwindの実用的なユーティリティと構造化の考え方をまとめました。プロジェクトで使えるスニペット付き。</p>
+                    </div>
+                  </a>
+                </article>
+
+                <article class="group rounded-xl bg-white border border-gray-200 overflow-hidden shadow-subtle hover:shadow-card transition transform hover:scale-[1.02]">
+                  <a href="./article.html" class="block">
+                    <div class="aspect-16-9">
+                      <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" alt="開発環境でのコーディングのイメージ" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="p-4">
+                      <div class="flex items-center gap-2 text-xs">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]">パフォーマンス</span>
+                        <time class="text-gray-500">2025-08-02</time>
+                      </div>
+                      <h3 class="mt-2 font-semibold text-gray-900 line-clamp-2">Intersection Observerで叶える軽快なアニメーションと遅延読み込み</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-3">スクロール連動の演出とLazy Loadingで、体験と速度の最適解を探る。</p>
+                    </div>
+                  </a>
+                </article>
+
+                <article class="group rounded-xl bg-white border border-gray-200 overflow-hidden shadow-subtle hover:shadow-card transition transform hover:scale-[1.02]">
+                  <a href="./article.html" class="block">
+                    <div class="aspect-16-9">
+                      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop" alt="アクセシビリティに配慮した設計のイメージ" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="p-4">
+                      <div class="flex items-center gap-2 text-xs">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]">アクセシビリティ</span>
+                        <time class="text-gray-500">2025-07-26</time>
+                      </div>
+                      <h3 class="mt-2 font-semibold text-gray-900 line-clamp-2">読みやすい日本語タイポグラフィの作り方</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-3">Noto Sans JPをベースに、サイズ、行間、文字間の調整ポイントを解説。</p>
+                    </div>
+                  </a>
+                </article>
+
+                <article class="group rounded-xl bg-white border border-gray-200 overflow-hidden shadow-subtle hover:shadow-card transition transform hover:scale-[1.02]">
+                  <a href="./article.html" class="block">
+                    <div class="aspect-16-9">
+                      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop" alt="会議でのブレーンストーミングのイメージ" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="p-4">
+                      <div class="flex items-center gap-2 text-xs">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]">ワークフロー</span>
+                        <time class="text-gray-500">2025-07-20</time>
+                      </div>
+                      <h3 class="mt-2 font-semibold text-gray-900 line-clamp-2">デザインシステムを支える、ルールとコンポーネント設計</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-3">色・余白・タイポグラフィを横断する共通ルールと、拡張しやすいUIパーツの作り方。</p>
+                    </div>
+                  </a>
+                </article>
+
+                <article class="group rounded-xl bg-white border border-gray-200 overflow-hidden shadow-subtle hover:shadow-card transition transform hover:scale-[1.02]">
+                  <a href="./article.html" class="block">
+                    <div class="aspect-16-9">
+                      <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1200&auto=format&fit=crop" alt="文章設計・ライティングのイメージ" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="p-4">
+                      <div class="flex items-center gap-2 text-xs">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]">ライティング</span>
+                        <time class="text-gray-500">2025-07-12</time>
+                      </div>
+                      <h3 class="mt-2 font-semibold text-gray-900 line-clamp-2">文章の情報設計：見出し・段落・要約の黄金比</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-3">読まれる文章は構造が命。文章設計の基本と実例を紹介します。</p>
+                    </div>
+                  </a>
+                </article>
+              </div>
+            </div>
+
+            <!-- Sidebar (desktop only) -->
+            <aside class="lg:col-span-4 hidden lg:block">
+              <div class="sticky top-24 space-y-6">
+                <section class="rounded-xl bg-white border border-gray-200 p-6 shadow-subtle">
+                  <h3 class="font-semibold text-gray-900">プロフィール</h3>
+                  <div class="mt-4 flex items-center gap-4">
+                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=256&auto=format&fit=crop" alt="プロフィール" loading="lazy" />
+                    <div>
+                      <p class="font-medium">Alex Tanaka</p>
+                      <p class="text-sm text-gray-600">デザイナー / フロントエンド</p>
+                    </div>
+                  </div>
+                  <p class="mt-3 text-sm text-gray-600">ミニマルで読みやすいUIが好き。デザインと実装の両輪で記事を書いています。</p>
+                </section>
+
+                <section class="rounded-xl bg-white border border-gray-200 p-6 shadow-subtle">
+                  <h3 class="font-semibold text-gray-900">人気記事</h3>
+                  <ul class="mt-4 space-y-3 text-sm">
+                    <li><a class="hover:text-[var(--color-primary)] transition" href="./article.html">余白設計の基本10則</a></li>
+                    <li><a class="hover:text-[var(--color-primary)] transition" href="./article.html">最小のCSSで最大の可読性</a></li>
+                    <li><a class="hover:text-[var(--color-primary)] transition" href="./article.html">Tailwindで作るコンポーネント</a></li>
+                    <li><a class="hover:text-[var(--color-primary)] transition" href="./article.html">配色の心理学</a></li>
+                  </ul>
+                </section>
+
+                <section class="rounded-xl bg-white border border-gray-200 p-6 shadow-subtle">
+                  <h3 class="font-semibold text-gray-900">カテゴリ</h3>
+                  <div class="mt-4 flex flex-wrap gap-2 text-sm">
+                    <a class="px-3 py-1 rounded-full border border-gray-300 hover:bg-gray-50 transition" href="#">デザイン</a>
+                    <a class="px-3 py-1 rounded-full border border-gray-300 hover:bg-gray-50 transition" href="#">フロントエンド</a>
+                    <a class="px-3 py-1 rounded-full border border-gray-300 hover:bg-gray-50 transition" href="#">パフォーマンス</a>
+                    <a class="px-3 py-1 rounded-full border border-gray-300 hover:bg-gray-50 transition" href="#">ライティング</a>
+                  </div>
+                </section>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="mt-16 sm:mt-24 reveal">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="rounded-2xl bg-white shadow-subtle border border-gray-200 p-8">
+            <h2 class="text-xl font-bold text-gray-900">このサイトについて</h2>
+            <p class="mt-4 text-gray-600">このブログは、デザイン・フロントエンド実装・読みやすいコンテンツ制作に関する知見を共有するために作られました。クリーンでミニマルなレイアウトと、読みやすいタイポグラフィを重視しています。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact/Footer CTA -->
+      <section id="contact" class="mt-16 sm:mt-24 reveal">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="rounded-2xl bg-[var(--color-primary)] text-white shadow-subtle p-8 sm:p-10 flex items-center justify-between flex-col sm:flex-row gap-4">
+            <div>
+              <h3 class="text-lg font-semibold">コラボやご相談はこちらから</h3>
+              <p class="text-white/80 mt-1">お気軽にお問い合わせください。SNSでもどうぞ。</p>
+            </div>
+            <div class="flex gap-3">
+              <a class="inline-flex items-center rounded-md bg-white text-[var(--color-primary)] px-4 py-2 hover:bg-gray-100 transition" href="#">お問い合わせ</a>
+              <a class="inline-flex items-center rounded-md border border-white/30 px-4 py-2 hover:bg-white/10 transition" href="#">X / Twitter</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 border-t border-gray-200">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-gray-600">
+        <p>© 2025 Modern Blog</p>
+        <div class="flex items-center gap-4">
+          <a class="hover:text-[var(--color-primary)] transition" href="#">Twitter</a>
+          <a class="hover:text-[var(--color-primary)] transition" href="#">GitHub</a>
+          <a class="hover:text-[var(--color-primary)] transition" href="#">RSS</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JS -->
+    <script>
+      // Mobile menu toggle
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+          const isOpen = !mobileMenu.classList.contains('hidden');
+          mobileMenu.classList.toggle('hidden');
+          menuBtn.setAttribute('aria-expanded', String(!isOpen));
+        });
+      }
+
+      // Intersection Observer for reveal animations
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('show');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
+    <!-- JSON-LD: WebSite + Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Modern Blog",
+        "url": "https://example.com/",
+        "inLanguage": "ja-JP",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://example.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Modern Blog",
+        "url": "https://example.com/",
+        "logo": "https://example.com/logo.png"
+      }
+    </script>
+  </body>
+  </html>

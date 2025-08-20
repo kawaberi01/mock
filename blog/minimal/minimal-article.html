@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>読みやすさを高めるUIの基本 | Modern Blog</title>
+    <meta name="description" content="余白・タイポグラフィ・コントラスト・階層化など、読みやすさを高めるUI設計の最小ルールを解説します。" />
+    <link rel="canonical" href="https://example.com/minimal-article.html" />
+    <meta property="og:title" content="読みやすさを高めるUIの基本 | Modern Blog" />
+    <meta property="og:description" content="余白・タイポグラフィ・コントラスト・階層化など、読みやすさを高めるUI設計の最小ルールを解説します。" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1280&auto=format&fit=crop" />
+    <meta property="og:url" content="https://example.com/minimal-article.html" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "YuGothic", "Helvetica Neue", Arial, sans-serif; }
+      .aspect-16-9 { position: relative; padding-top: 56.25%; }
+      .aspect-16-9 > img, .aspect-16-9 > iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      /* 記事の最小タイポグラフィ */
+      .article { font-size: 16px; line-height: 1.75; }
+      .article h2 { margin-top: 1.75rem; margin-bottom: .75rem; font-weight: 700; font-size: 1.25rem; }
+      .article h3 { margin-top: 1.25rem; margin-bottom: .5rem; font-weight: 600; font-size: 1.125rem; }
+      .article p { margin: .75rem 0; color: #334155; }
+      .article ul { list-style: disc; margin: .5rem 0 .75rem 1.25rem; color: #334155; }
+      .article code { background: #f1f5f9; padding: .1rem .35rem; border-radius: .25rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: .9em; }
+      .article blockquote { border-left: 4px solid #e2e8f0; padding-left: 1rem; color: #475569; }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-800">
+    <header class="sticky top-0 z-50 bg-white border-b">
+      <div class="mx-auto max-w-5xl px-4 h-14 flex items-center justify-between">
+        <a href="./minimal-index.html" class="font-semibold">Modern Blog</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-700">
+          <a href="./minimal-index.html#articles" class="hover:text-blue-600">記事</a>
+          <a href="./minimal-index.html#about" class="hover:text-blue-600">このサイトについて</a>
+          <a href="./minimal-index.html#contact" class="hover:text-blue-600">お問い合わせ</a>
+        </nav>
+        <details class="md:hidden">
+          <summary class="cursor-pointer text-sm text-slate-600">メニュー</summary>
+          <nav class="mt-2 space-y-2">
+            <a href="./minimal-index.html#articles" class="block text-sm hover:text-blue-600">記事</a>
+            <a href="./minimal-index.html#about" class="block text-sm hover:text-blue-600">このサイトについて</a>
+            <a href="./minimal-index.html#contact" class="block text-sm hover:text-blue-600">お問い合わせ</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main class="pt-6">
+      <!-- Article header -->
+      <section class="py-6">
+        <div class="mx-auto max-w-3xl px-4">
+          <nav class="text-sm text-slate-600"><a class="hover:text-blue-600" href="./minimal-index.html">Home</a> <span class="text-slate-400">/</span> 記事</nav>
+          <h1 class="mt-2 text-3xl font-bold text-slate-900">読みやすさを高めるUIの基本</h1>
+          <div class="mt-2 text-sm text-slate-600">デザイン <span class="text-slate-300">/</span> 2025-08-10 <span class="text-slate-300">/</span> 更新: 2025-08-12</div>
+          <div class="mt-6 aspect-16-9 rounded-lg overflow-hidden border">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1280&auto=format&fit=crop" alt="UIとノートのイメージ" loading="eager" fetchpriority="high" />
+          </div>
+        </div>
+      </section>
+
+      <!-- TOC: 静的 -->
+      <section class="py-4">
+        <div class="mx-auto max-w-3xl px-4">
+          <div class="rounded-lg bg-white border p-4">
+            <p class="text-sm font-semibold text-slate-900">目次</p>
+            <nav class="mt-2 text-sm text-slate-700 space-y-1">
+              <a href="#spacing" class="block hover:text-blue-600">1. 余白設計の基本</a>
+              <a href="#type" class="block hover:text-blue-600">2. タイポグラフィ</a>
+              <a href="#contrast" class="block hover:text-blue-600">3. コントラストと配色</a>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <!-- Article body -->
+      <section class="py-6">
+        <div class="mx-auto max-w-3xl px-4">
+          <article class="article rounded-lg bg-white border p-6">
+            <p>この記事では、UIの読みやすさを高めるための基本原則を、最小構成で整理します。余白、タイポグラフィ、色のコントラスト、情報の階層化など、まず押さえるべき要点に絞って説明します。</p>
+
+            <h2 id="spacing">1. 余白設計の基本</h2>
+            <p>余白は情報同士の関係を示します。8px 系の等比スケールを用い、コンポーネント内外で一貫性を保ちましょう。</p>
+            <ul>
+              <li>要素内: 小さめ（例: 8–12px）</li>
+              <li>要素間: 中〜大（例: 16–24px）</li>
+            </ul>
+
+            <h3>カードレイアウトの例</h3>
+            <p>カード内の内側余白と、カード同士の外側余白のメリハリで、情報のグルーピングが明確になります。</p>
+
+            <h2 id="type">2. タイポグラフィ</h2>
+            <p>本文は <code>16px</code> / <code>line-height: 1.7</code> を基準に、見出しは 1.25x / 1.5x の2段階に抑えると、階層の過度な複雑化を防げます。</p>
+
+            <h3>見出しの階層</h3>
+            <p>サイズだけでなく、太さ・余白・色のコントラストで階層を表現すると、視線誘導が自然になります。</p>
+
+            <h2 id="contrast">3. コントラストと配色</h2>
+            <p>本文テキストと背景のコントラスト比は WCAG の推奨に沿って確保します。アクセントカラーは使いすぎず、リンクやCTAなど意味のある箇所に限定します。</p>
+
+            <blockquote>最小限のルールで設計すると、改修コストが下がり、読みやすさが安定します。</blockquote>
+          </article>
+        </div>
+      </section>
+
+      <!-- Related (最小) -->
+      <section class="py-10 bg-white border-t">
+        <div class="mx-auto max-w-3xl px-4">
+          <h2 class="text-lg font-semibold text-slate-900">関連する記事</h2>
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="./minimal-article.html" class="border rounded-lg p-4 hover:border-slate-400">
+              <div class="text-xs text-slate-500">フロントエンド</div>
+              <div class="mt-1 font-medium text-slate-900">配色とコントラストの最小ルール</div>
+            </a>
+            <a href="./minimal-article.html" class="border rounded-lg p-4 hover:border-slate-400">
+              <div class="text-xs text-slate-500">タイポグラフィ</div>
+              <div class="mt-1 font-medium text-slate-900">本文の読みやすさを決める行間とサイズ</div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="py-8 text-center text-sm text-slate-500">
+      <div class="mx-auto max-w-5xl px-4">© 2025 Modern Blog</div>
+    </footer>
+  </body>
+  </html>
+
