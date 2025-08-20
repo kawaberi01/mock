@@ -1,0 +1,142 @@
+/* Basic palette and typography */
+:root {
+  --color-bg: #ffffff;
+  --color-bg-alt: #f3f4f6;
+  --color-text: #374151;
+  --color-accent: #3b82f6;
+  --max-width: 1200px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  line-height: 1.7;
+  color: var(--color-text);
+  background: var(--color-bg-alt);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+header,
+footer {
+  background: var(--color-bg);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Layout */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: 3fr 1fr;
+  }
+}
+
+/* Article grid */
+.article-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.article-card {
+  background: var(--color-bg);
+  border: 1px solid #e5e7eb;
+  border-radius: .5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.article-card img {
+  width: 100%;
+  height: auto;
+}
+
+.article-card-content {
+  padding: 1rem;
+  flex: 1 1 auto;
+}
+
+.article-card-content h3 {
+  margin: .5rem 0;
+  font-size: 1.125rem;
+}
+
+.article-card-content .meta {
+  font-size: .875rem;
+  color: #6b7280;
+}
+
+.tag {
+  display: inline-block;
+  padding: .125rem .5rem;
+  background: var(--color-accent);
+  color: #fff;
+  border-radius: .25rem;
+  font-size: .75rem;
+}
+
+.sidebar {
+  background: var(--color-bg);
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: .5rem;
+}
+
+/* Article page */
+.article-header img {
+  border-radius: .5rem;
+  margin-top: 1rem;
+}
+
+.article-body h2 {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+}
+
+.article-body h3 {
+  margin-top: 1.25rem;
+  font-size: 1.25rem;
+}
+
+.article-body p {
+  margin: 1rem 0;
+}
+
+.comment-box {
+  margin-top: 2rem;
+}
+
+.comment-box textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: .5rem;
+  font-family: inherit;
+}
+
+.comment-box button {
+  margin-top: .5rem;
+  padding: .5rem 1rem;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: .25rem;
+  cursor: pointer;
+}
